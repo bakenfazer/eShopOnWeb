@@ -18,7 +18,6 @@ RUN dotnet restore
 RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
-
 # ------------------------------------------------------------------------------------------------
 # The following code will instrument your application with the New Relic agent. Be sure to update
 # the NEW_RELIC_LICENSE_KEY and NEW_RELIC_APP_NAME prior to building the image. 
@@ -33,6 +32,7 @@ RUN apt-get update && apt-get install -y wget ca-certificates gnupg \
 && rm -rf /var/lib/apt/lists/*
 
 # Enable the agent
+ARG NR_API_KEY
 ENV CORECLR_ENABLE_PROFILING=1 \
 CORECLR_PROFILER={36032161-FFC0-4B61-B559-F6C5D41BAE5A} \
 CORECLR_NEWRELIC_HOME=/usr/local/newrelic-dotnet-agent \

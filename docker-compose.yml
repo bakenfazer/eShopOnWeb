@@ -6,10 +6,10 @@ services:
     build:
       context: .
       dockerfile: src/Web/Dockerfile
+      args: 
+        NR_API_KEY: ${NR_API_KEY}
     depends_on:
       - "sqlserver"
-    environment:
-      - NR_API_KEY=${NR_API_KEY}
   eshoppublicapi:
     image: ${DOCKER_REGISTRY-}eshoppublicapi
     build:
