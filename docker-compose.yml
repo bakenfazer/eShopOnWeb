@@ -8,6 +8,8 @@ services:
       dockerfile: src/Web/Dockerfile
     depends_on:
       - "sqlserver"
+    environment:
+      - NR_API_KEY=${NR_API_KEY}
   eshoppublicapi:
     image: ${DOCKER_REGISTRY-}eshoppublicapi
     build:
